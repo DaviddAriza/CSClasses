@@ -1,0 +1,60 @@
+Project Description
+	Our animation showcases a vibrant and dynamic fish tank environment. The scene will include three types of aquatic creatures, each moving around within the tank to create a lively underwater world. Part of our inspiration to create a fish tank came from our original idea of replicating the Welch animated wall background but decided on the fish tank idea to keep the project from being too complicated. The "story" of the sequence revolves around the interactions between these different fish as they swim gracefully, occasionally darting or turning around, exploring the tank. The scene will aim to maintain a balance of peaceful and playful movement, mimicking the natural behavior of real aquatic animals. The sequence is expected to run infinitely, with each fish's path repeating over time.
+
+Main File:
+
+This file creates the objects and displays them in the scene. The classes are instantiated in the setup() function. The moveAndDisplay() method of each class is then called in the draw() function to display and animate the objects. An MP3 file and an image file are also read and stored in the setup() function to play sound and display the background of the scene.
+
+Clownfish:
+
+This file creates the Clownfish class, which displays a clownfish moving horizontally in the scene and flipping its fins. The class has the following variables:
+
+PVector position, PVector direction, float radius, float speed: Control the size and movement of the fish
+PShape body, PShape tail, PShape fins, PShape middle_fin, PShape lower_fin: store the different body parts of the fish
+int rotation_level_mf, int rotation_level_lf: store the levels of rotation of the middle and lower fins
+int rotation_direction_mf, int rotation_direction_lf: track the direction of the fins’ rotation
+int facing_left: tracks the direction the fish is facing and is updated every time the fish moves off-screen. It is also used in the scale function to flip the shapes when the fish changes direction
+
+This class has four main methods:
+
+display(): This method reads in SVG files stored in the data folder, stores them in PShape variables, and draws these PShapes on the screen.
+move(): This method updates the x-position of the class using the speed and direction variables. If the clownfish moves off the screen, the method changes the facing_left variable so that it moves in the reverse direction.
+moveAndDisplay(): This method calls four methods: move(), lower_fin_display(), display(), and middle_fin_display(). The move method updates the fish’s position. The other three methods then display different body parts of the fish onto the screen.
+middle_fin_display() and lower_fin_display(): These two methods enable the rotation of the middle and lower fins of the fish using the translate() and rotate() functions. The rotation_direction variable keeps track of the fin's rotation angle and controls the direction of the rotation.
+
+Tealfish:
+
+This file creates the Tealfish class, which displays a tealfish moving horizontally in the scene while its fin animates up and down to simulate swimming. The class has the following variables:
+
+PVector position, PVector direction, float radius, float speed: Control the size and movement of the fish.
+PShape body, PShape head, PShape fins: Store the different body parts of the fish.
+int facing_left: Tracks the direction the fish is facing and is updated every time the fish moves off-screen. It is also used in the scale function to flip the shapes when the fish changes direction.
+float finAngle, float finAngleSpeed: Control the angle and speed of the fin's oscillation as the fish swims.
+
+This class has four main methods:
+
+display(): This method reads in SVG files stored in the data folder, stores them in PShape variables, and draws these PShapes on the screen. It also includes the animated movement of the fin.
+move(): This method updates the x-position of the class using the speed and direction variables. If the tealfish moves off the screen, the method changes the facing_left variable so that it moves in the reverse direction.
+moveAndDisplay(): This method combines movement and display by first calling the move() method to update the fish’s position, then calling the display() method to render the fish at its new location on the screen.
+lowerFinDisplay(): This method enables the rotation of the fin of the fish using the translate() and rotate() functions. The finAngle variable keeps track of the fin's rotation angle to simulate natural swimming movement.
+
+
+Jellyfish:
+
+This file creates the Jellyfish class, which displays a jellyfish moving horizontally in the scene and moving its tentacles up and down. The class has the following variables:
+
+PVector position, PVector direction, float radius, float speed: Control the size and movement of the fish
+PShape body, PShape upper_body, PShape lower_body, PShape left_tent, PShape mid_tent, and PShape left_tent: store the different body parts of the fish
+float tentacleOffset, float tentacleSpeed: tracks the movement and speed of the tentacles
+int facing_left: tracks the direction the fish is facing and is updated every time the fish moves off-screen. It is also used in the scale function to flip the shapes when the fish changes direction
+
+The class has four methods:
+
+display(): The display() method reads the SVG files for the jellyfish stored as PShapes, and displays them on the screen. It calls on animateTentacles() to render the tentacles and animate them.
+animateTentacles(): This method controls the animation of the jellyfish’s tentacles using a sine wave function to simulate natural, fluid movement.
+move(): This method updates the jellyfish’s position based on its current speed and direction, moving it across the screen. If the jellyfish moves beyond the screen boundaries, it reappears on the opposite side (left to right or top to bottom), implementing screen wrapping to keep the jellyfish in motion continuously.
+moveAndDisplay(): This method combines both movement and display. First, it calls move() to update the jellyfish's position, and then it calls display() to render the jellyfish at its new location on the screen.
+
+Documentation:
+
+The assignment was divided into three parts for the three group members. Liyan worked on the Clownfish class by designing the shape of the clownfish and animating it appropriately. Cole worked on the Tealfish class by designing the shape of the tealfish and animating it appropriately. David worked on the Jellyfish class by designing the shape of the jellyfish and animating it appropriately. Everyone contributed to the main .pde file by adding the background, sound, or respective objects into the full animation.

@@ -1,0 +1,10 @@
+Group 1:
+David Ariza
+Cole Carlile
+Liyan Deng
+
+David Ariza: My strengths are that I am a good communicator and I can adapt to situations quickly. My weaknesses are that it takes some time to do the assignment because I am occupied with other classes, work, and extracurriculars that take up my time. For the project, I worked on the frequency visualization by writing code in processing to create a pie chart that displays the frequencies of the words in the text.
+
+Cole Carlile: Cole's strength's are that they are a good communicator, can adapt to situations quickly, and can accomplish tasks in a timely manner. I haven't noticed any weaknesses with Cole and is a reliable teammate. For the project, Cole worked on the extraction part by writing code in python that takes in the novel text and outputs three unique text files called allwords.txt, uniquewords.txt, and wordfrequency.txt.
+
+Liyan Deng: Liyan's strength's are that they are a good communicator, can adapt to situations quickly, and can accomplish tasks in a timely manner. I haven't noticed any weaknesses with Liyan and is also a reliable teammate. For the project, Liyan worked on the cloud word visualization by writing code in processing to create a colored word cloud that covers the entire window using the unique words text file.
