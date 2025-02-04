@@ -1,0 +1,93 @@
+Project Title: Asteroid Typer
+Team Members: David Ariza, Miranda Chen, Liyan Deng, Brighton Liu
+
+Project Description
+The Asteroid Typer is a typing game where players take on the challenge of destroying as many asteroids as possible by typing the words on each asteroid to prevent them from colliding with Earth. Players start with three health points, and the game ends when they lose all three lives. The game features four modes: English Most Common 1k Words, English Most Common 5k Words, English Most Common 10k Words, and an Endless Mode. Players can customize the fall rate of the asteroids and the number of asteroids they need to destroy to win. In Endless Mode, an infinite number of asteroids spawn, and the maximum number of asteroids destroyed by the player determines their score. The game also includes a tutorial page with instructions and a pause page accessible during gameplay.
+
+Functions, Classes, and Work Distributions
+
+Brighton: 
+Asteroid Class: Coded the main instantiation methods, the display() method, which displays the asteroid image at a specified position. I coded update(), where the position of the asteroid image is updated based on the fall-rate passed in during the instantiation method. startExplode() starts the explosion sequence for the asteroid. getFinish(), getPos(), getText(), and setVelocity() are just assorted get/set methods used by the Game class in order to determine if collision occurs, or if the user-typed word matches with the asteroid word, or to change the velocity of the asteroid (especially relevant in endless, where the fall velocity is slowly incremented to increase difficulty). generateLaser(), and the warning sprite were coded by Liyan. 
+
+Typing Functionality: under keyPressed() in the main class, typing functionality has been added so that the user is able to type using alphaNumeric keys, have them show up on screen (this display functionality is coded in display()), and then also have the ability to use backspace and Tab to delete a single character, or the entire string, respectively.
+
+Game Class: This is the main class that creates a game instance. I coded main instantiation methods, which take in difficulty, fallVel set by the user via slider, and various SoundFiles. generateGame() instantiates the ArrayList of asteroids that the user will need to clear, and this ArrayList will be run through via a for loop to display and update all asteroids onto the screen. The position of the Asteroids is randomized with some constraints, such as ensuring none of the asteroids overlap, or end up off screen (thus cutting off the word on the edges of the screen). updateGame() simply runs through the Asteroid ArrayList, updating all positions based on fall velocity. If the gamemode is endless, a new asteroid is added to the ArrayList for every one that is cleared by the user. Here, the position of the Asteroid is also checked, and if it reaches a certain y-pos near the bottom of the screen, the explosion sprite is started, and the player will lose a life. If the user clears all Asteroids in the ArrayList, a “You Win!” message is displayed on screen, along with buttons to quit or go back to the main menu (button functionality created by other group members). If the user allows 3 asteroids to reach the bottom, and they lose 3 lives, a “You Lose!” Message is displayed on screen, along with the same buttons as previously mentioned. checkAsteroidPos() is used in generateGame() and checkText(), to ensure that none of the randomly generated asteroids are overlapping with each other. checkText() is used to check the user typed text against all Asteroids in the game, to see if the user typed text matches with any of the words in the game. isFinished() simply returns if the game is over (either won or lost), which is used in the main class to determine what HUD to display on screen. 
+
+Liyan:
+HP Class: The HP Class tracks and displays the player’s current health points. It has two methods: display() and removeHP(). The display() method shows the player’s lives as hearts at the top-left corner of the screen during gameplay. When the player loses a life, it plays an animation of a heart disappearing. The removeHP() method is called by the Game Class when an asteroid hits Earth. It notifies the display() method to play the animation, and once the animation ends, it reduces the player’s HP by 1.
+
+Slider Class: There are two sliders on the main menu page of the game, designed for the player to customize the fall rate and the winning condition (the number of asteroids they need to destroy). When the player presses the mouse on the main menu page, the main Processing file calls isSelected() in the Slider Class, which checks whether the player has selected the slider. If it is selected, the slider updates its position as well as the corresponding value when the player moves the mouse. When the player releases the mouse, mouse_release() is called, and the slider is deselected.
+
+Timer Class: The Timer Class is primarily used in animations to determine when to switch sprites. The start() method records the current time and starts the timer. The activate() method checks the duration elapsed since the timer started and determines whether the time is up. The stop() method ensures that the timer cannot be activated again.
+
+Earth Class: The Earth Class has a displayEarth() method that displays the Earth during gameplay. Initially, I planned for the Earth to have a spinning animation. However, it was deemed redundant, so the animation was not implemented.
+
+Laser Class: The Laser Class plays a laser shot animation that destroys an asteroid when the player successfully types the word on the asteroid. When the Laser Class is initialized, a starting position, an ending position (the position of the asteroid), and the total number of frames for the animation duration are passed to the object. A laser shot consists of a laser body and a laser head. The laser body is a rectangular image. During the animation, the laser body is rotated toward the direction of the ending position, and the rectangular image is stretched to simulate the laser's travel and match its current length. The laser head is displayed at the ending position of the laser body.
+
+Asteroid Destroyed Animation: When a laser reaches its target asteroid, its isFinished() method notifies the Game Class that the laser animation is complete. The Game Class then notifies the corresponding Asteroid Class to display a “being hit” animation, showing the asteroid’s explosion accompanied by a sound effect. After the animation finishes, the Game Class removes the Asteroid object from the asteroid array list.
+
+Warning Signs on Asteroids: When an asteroid is close to Earth or the bottom of the screen, the Asteroid Class displays a warning sign above the asteroid to draw the player’s attention. The warning sign has its own animation, changing in size and oscillating horizontally while falling with the asteroid.
+
+Tutorial Page: The main menu features a “Tutorial” button. When the button is clicked, the main file calls the display() method in the Tutorial Class, which generates and displays the game rules and instructions.
+
+Pause Game Functionality: During gameplay, the player can click the “Pause” button or press the SPACE key to pause the game. This stops the falling of the asteroids and displays two buttons: Main Menu and Return to Game. Clicking the “Main Menu” button takes the player to the main menu, while clicking the “Return to Game” button resumes gameplay.
+
+
+Radio Button Class: The Radio Button Class extends the properties and methods of the Button Class. Additionally, a list of buttons and the object’s ID are passed to the Radio Button Class. The isClicked() method checks if the button is clicked and ensures that only one radio button can be selected at a time. The Radio Button Class also displays a golden frame when the button is selected. This class is used for the game mode buttons and allows the player to identify the currently selected game mode.
+
+
+Miranda:
+Button Class: The button class defines interactive button for GUI purpose. Key features are changing color when hovered, display customizable label, determining interaction state, font size of button label, button position and button colors. The display() method renders the button on the screen. The checkHover() method updates color of button depending on the mouse position. The isClicked() method checks if mouse clicks the button. The isReleased() method reset button state to default 0. Used to create buttons in the main menu such as play, the different game modes and sound button.
+
+Particle Class: The particle class defines the behavior and properties of a particle in a particle system. It uses the update() method to move the particle by adding its velocity to its position. It also uses the display() method to render the particle on the screen, calling noStroke() so there is no outline. The Particle Class also uses isDead() to check if lifespan reach 0 or less, return true if particle is no longer active. The final display for the Particle Class is an effect of flickering fire following the falling asteroids. 
+
+High Score: A high score is displayed in the main menu and updates if the user achieves the highest score in endless mode. The high score is also displayed in the game over state.
+
+Game music: Imported sound file into processing, game music will play in the main menu and during the game. If the player clicks the sound button the game music can be turned on and off.
+
+David:
+WPM Class: The WPM class uses the timer class to create a tracker of the words typed in a minute. The WPM is displayed during gameplay and is updated every second to give an accurate reading of the words typed by the player every minute. Contains the parameters updateInterval which tracks how often to update the timer. There are three methods in the class: reset(), incrementWords(), and updateWPM(). The reset() method resets the integers used to track the wordsTyped, currentWPM, and elapsedTime to 0. The incrementWords() method updates the word typed by adding 1 to the wordsTyped. The updateWPM() method calculates the elapsedTime and the currentWPM using the wordsTyped WPMTimer start.
+
+Video Presentation: Planned and edited the video presentation for the group using audio files sent by each member explaining their respective parts of the project with appropriate footage of the code and game during said explanations. Aimed to make the presentation creative and engaging for the audience while displaying code and gameplay at appropriate times with cool, unique animations and transitions for a fluid presentation with gameplay shown alongside.
+
+
+
+References and Documentation:
+
+Main Menu Background:
+https://en.softonic.com/articles/wallpapers-space-wallpaper
+
+Asteroid PNG: 
+https://stock.adobe.com/images/Cartoon-flying-space-asteroid-with-craters-and-bumps.-Vector-isolated-stone./633745224?as_campaign=TinEye&as_content=tineye_match
+
+Explosion Sprite (falling to Earth):
+https://www.pngegg.com/en/png-eclaj
+
+English Most Common 1K Words:
+https://www.ef.edu/english-resources/english-vocabulary/top-1000-words/
+
+English Most Common 5K Words:
+https://github.com/mahsu/IndexingExercise/blob/master/5000-words.txt
+
+English Most Common 10K Words:
+http://sherwoodschool.ru/en/vocabulary/proficiency/
+
+Crater Image: https://www.istockphoto.com/vector/hole-gm455309553-15963343 
+
+Sound Effects (explosions): https://pixabay.com/sound-effects/ 
+
+Sound Effects (button press, slider movements): https://jdsherbert.itch.io/ultimate-ui-sfx-pack 
+
+Asteroid Being Hit Sprite: https://www.freepik.com/vectors/explosion-sprite 
+
+Earth Image: https://falkisdreadnour.itch.io/pixelated-planetsinclude-2k-and-4k-hd 
+
+Warning Sign Sprite: https://tenor.com/view/warning-joypixels-caution-slow-down-hold-up-gif-17554597 
+
+HP Sprite: Self-drawn, referenced from https://fliflifly.itch.io/hearts-and-health-bar 
+
+Laser Images: Self-drawn, referenced from https://retsnail-assets.itch.io/laserbeamfx 
+
+Laser Machine Image: Self-drawn
+
+Space music for game: https://pixabay.com/music/upbeat-space-120280/
